@@ -4,39 +4,27 @@
  * @format
  */
 
-import React from "react";
+import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  Pressable,
-  View,
-  Text,
-  ScrollView,
-  TextInput,
-  Button,
-} from "react-native";
-import { useState } from "react";
-import ToDoList from "./components/ToDoList";
-import ToDoForm from "./components/ToDoForm";
+  StyleSheet
+} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
-  const [tasks, setTasks] = useState([
-    "Do the laundry",
-    "Go to the gym",
-    "Walk the dog",
-  ]);
+import HomeScreen from './screens/HomeScreen';
+import AboutScreen from './screens/AboutScreen';
 
-  const addTask = (task) => {
-    setTasks([...tasks, task]);
-  };
+function App() {
+
+  const Stack = createStackNavigator();
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <ToDoList tasks={tasks} />
-        <ToDoForm addTask={addTask} />
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -44,27 +32,29 @@ const styles = StyleSheet.create({
   task: {
     padding: 10,
     borderBottomWidth: 1,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
   },
   completed: {
-    backgroundColor: "#e0e0e0",
+    backgroundColor: '#e0e0e0',
   },
   taskText: {
     fontSize: 16,
   },
   form: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginHorizontal: 20,
     marginTop: 20,
   },
   input: {
     flex: 1,
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     paddingHorizontal: 10,
     paddingVertical: 5,
     marginRight: 10,
   },
 });
+
+export default App;
